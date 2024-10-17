@@ -34,10 +34,8 @@ describe 'States API' do
     it 'and raise internal error' do
       allow(State).to receive(:all).and_raise(ActiveRecord::QueryCanceled)
 
-      # Act
       get '/api/v1/states'
 
-      # Assert
       expect(response).to have_http_status(500)
     end
   end

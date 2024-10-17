@@ -5,8 +5,9 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :categories, only: [:index]
-      resources :states, only: [:index]
+      resources :categories, only: %i[index]
+      resources :states, only: %i[index]
+      resources :suppliers, only: %i[index show]
     end
   end
 end
