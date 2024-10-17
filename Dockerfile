@@ -25,5 +25,4 @@ COPY Gemfile Gemfile.lock ./
 RUN bundle install
 
 COPY . .
-# RUN bin/setup
-ENTRYPOINT ["/bin/bash"]
+RUN bin/setup
