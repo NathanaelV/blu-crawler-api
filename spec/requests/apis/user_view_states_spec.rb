@@ -21,5 +21,24 @@ describe 'States API' do
       expect(json_response.last.keys).not_to include 'created_at'
       expect(json_response.last.keys).not_to include 'updated_at'
     end
+
+    it 'return empty if there is no state' do
+      get '/api/v1/states'
+
+      expect(response.status).to eq 200
+      expect(response.content_type).to include 'application/json'
+      json_response = JSON.parse(response.body)
+      expect(json_response).to eq []
+    end
+
+    it 'and raise internal error' do
+      allow(State).to receive(:all).and_raise(ActiveRecord::QueryCanceled)
+
+      # Act
+      get '/api/v1/states'
+
+      # Assert
+      expect(response).to have_http_status(500)
+    end
   end
 end
