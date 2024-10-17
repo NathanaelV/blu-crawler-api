@@ -1,28 +1,16 @@
 default: &default
-  adapter: postgresql
-  encoding: unicode
+  adapter: sqlite3
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: postgres_user
-  password: postgres_password
-  host: datab
-  port: 5432
+  timeout: 5000
 
 development:
   <<: *default
-  database: blu_crawler_api_development
-  adapter: postgresql
-  encoding: unicode
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: postgres_user
-  password: postgres_password
-  host: datab
+  database: storage/development.sqlite3
 
 test:
   <<: *default
-  database: blu_crawler_api_test
+  database: storage/test.sqlite3
 
 production:
   <<: *default
-  database: blu_crawler_api_production
-  username: blu_crawler_api
-  password: <%= ENV["BLU_CRAWLER_API_DATABASE_PASSWORD"] %>
+  database: storage/production.sqlite3
