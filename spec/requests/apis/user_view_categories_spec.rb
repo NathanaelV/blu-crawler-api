@@ -39,6 +39,7 @@ describe 'Category API' do
 
       # Assert
       expect(response).to have_http_status(500)
+      expect(response.body).to eq '{"message":"500 - Problema do lado do servidor"}'.as_json
     end
   end
 end

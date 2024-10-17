@@ -50,6 +50,7 @@ describe 'Suppliers API' do
       get '/api/v1/suppliers'
 
       expect(response).to have_http_status(500)
+      expect(response.body).to eq '{"message":"500 - Problema do lado do servidor"}'.as_json
     end
   end
 
@@ -79,6 +80,7 @@ describe 'Suppliers API' do
       get '/api/v1/suppliers/777'
 
       expect(response.status).to eq 404
+      expect(response.body).to eq '{"message":"404 - Elemento não encontrado"}'.as_json
     end
 
     it 'and raise internal error' do
@@ -87,6 +89,7 @@ describe 'Suppliers API' do
       get '/api/v1/suppliers/2'
 
       expect(response).to have_http_status(500)
+      expect(response.body).to eq '{"message":"500 - Problema do lado do servidor"}'.as_json
     end
   end
 end
