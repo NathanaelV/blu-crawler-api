@@ -33,6 +33,7 @@ describe 'Suppliers API' do
       expect(json_response.last['name']).to eq supplier_second.name
       expect(json_response.last.keys).not_to include 'created_at'
       expect(json_response.last.keys).not_to include 'updated_at'
+      expect(json_response.last.keys).not_to include 'category_id'
     end
 
     it 'return empty if there is no supplier' do
@@ -74,6 +75,7 @@ describe 'Suppliers API' do
       expect(json_response['states']).to eq states.as_json(except: %i[created_at updated_at])
       expect(json_response.keys).not_to include 'created_at'
       expect(json_response.keys).not_to include 'updated_at'
+      expect(json_response.keys).not_to include 'category_id'
     end
 
     it 'fail if supplier not found' do
