@@ -1,24 +1,6 @@
-# README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+1. Instalar o Docker na máquina
+2. Baixar o arquivo e acessar o arquivo
+3. Criar o arquivo ENV para adicionar as variáveis de ambienete
+4. Construir a imagem Docker `docker build -t nome-da-imagem:versão .`
+5. Executar a imagem `docker run --rm -it -v $(pwd):blu-crawler nome-da-imagem:versão`
