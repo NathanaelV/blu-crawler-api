@@ -1,0 +1,25 @@
+require 'rails_helper'
+
+describe 'States API' do
+  context 'GET /api/v1/states' do
+    it 'success' do
+      state = State.create!(name: 'BA')
+      state_second = State.create!(name: 'GO')
+
+      get '/api/v1/states'
+
+      expect(response.status).to eq 200
+      expect(response.content_type).to include 'application/json'
+      json_response = JSON.parse(response.body)
+      expect(json_response.first['id']).to eq state.id
+      expect(json_response.first['name']).to eq state.name
+      expect(json_response.first.keys).not_to include 'created_at'
+      expect(json_response.first.keys).not_to include 'updated_at'
+
+      expect(json_response.last['id']).to eq state_second.id
+      expect(json_response.last['name']).to eq state_second.name
+      expect(json_response.last.keys).not_to include 'created_at'
+      expect(json_response.last.keys).not_to include 'updated_at'
+    end
+  end
+end
