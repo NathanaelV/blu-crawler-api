@@ -34,6 +34,8 @@ begin
 
   categories.shift
 
+  puts "\n\n\nTodos elementos salvos no Array\n\n\n"
+
   # Clica em uma das categorias
   driver.find_element(link_text: categories[0]).click
 
