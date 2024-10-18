@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root 'home#index'
   
   post 'activate_crawler', to: 'crawler#activate'
+  get 'crawler_running', to: 'crawler#crawler_running'
 
   namespace :api do
     namespace :v1 do
