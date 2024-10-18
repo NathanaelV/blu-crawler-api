@@ -9,3 +9,20 @@ services:
       - 3000:3000
     volumes:
       - .:/blu-crawler
+      - logvolume01:/var/log
+    depends_on:
+      - redis
+  jobs:
+    build: .
+    command: bin/jobs
+    volumes:
+      - .:/app
+    environment:
+      - RAILS_ENV=development
+    depends_on:
+      - redis
+  redis:
+    image: "redis:alpine"
+
+volumes:
+  logvolume01:

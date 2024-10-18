@@ -15,6 +15,8 @@ gem "tzinfo-data", platforms: %i[ windows jruby ]
 
 gem 'selenium-webdriver', '~> 4.25'
 
+gem 'solid_queue'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'byebug'
