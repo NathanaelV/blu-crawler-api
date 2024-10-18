@@ -30,7 +30,7 @@ class Api::V1::SuppliersController < Api::V1::ApiController
   end
 
   def search_operator
-    if params[:operator]&.upcase == 'AND'
+    if params[:operator]&.downcase == 'and'
       Supplier.joins(:states).where("suppliers.category_id = ?", params[:category_id])
               .and(Supplier.joins(:states).where("states.id = ?", params[:state_id]))
     else
