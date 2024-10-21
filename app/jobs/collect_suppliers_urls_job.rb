@@ -28,6 +28,8 @@ class CollectSuppliersUrlsJob < ApplicationJob
       driver.switch_to.window(driver.window_handles.last)
       supplier_url = driver.current_url
 
+      next if Supplier.find_by(url: supplier_url)
+
       CrawlerSuppliersJob.perform_later(supplier_url)
 
       driver.close
