@@ -14,7 +14,7 @@ RSpec.describe CollectSuppliersUrlsJob, type: :job do
     expect(CrawlerSuppliersJob).to have_received(:perform_later).with('https://fornecedores.blu.com.br/segmento/bicicletas/vitta-industria-e-comercio-de-bicicletas-ltda')
   end
 
-  it 'Active Jobs to vetuario' do
+  it 'Active Jobs to vestuario' do
     collect_suppliers_urls_job = spy('CrawlerSuppliersJob')
     stub_const 'CrawlerSuppliersJob', collect_suppliers_urls_job
     category_url = 'https://fornecedores.blu.com.br/segmento/vestuario-em-geral'

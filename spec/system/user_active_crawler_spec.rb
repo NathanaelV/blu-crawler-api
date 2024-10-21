@@ -8,6 +8,7 @@ describe 'User active crawler' do
     visit root_path
     click_on 'Coletar informações'
     
-    expect(CrawlerCategoriesJob).to have_received(:perform_now)
+    expect(CrawlerCategoriesJob).to have_received(:perform_later)
+    expect(current_path).to eq '/crawler_running'
   end
 end
