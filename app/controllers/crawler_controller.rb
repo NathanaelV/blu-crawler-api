@@ -1,6 +1,6 @@
 class CrawlerController < ApplicationController
   def activate
-    CrawlerCategoriesJob.perform_later
+    CreateSuppliersJob.perform_later
     redirect_to crawler_running_path
   end
 

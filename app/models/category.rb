@@ -1,3 +1,3 @@
 class Category < ApplicationRecord
-  has_many :suppliers
+  has_and_belongs_to_many :suppliers
 end
