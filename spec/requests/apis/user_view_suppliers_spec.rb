@@ -3,14 +3,15 @@ require 'rails_helper'
 describe 'Suppliers API' do
   context 'GET /api/v1/suppliers' do
     it 'success' do
+      supplier = Supplier.create!(name: 'Caloi', slug: 'caloi', cnpj: '35806380000100')
       category = Category.create!(name: 'Bicicletas')
-      supplier = Supplier.create!(name: 'Caloi', category:)
+      supplier.categories << category
       states = []
-      states << State.create!(name: 'Todo o Brasil')
+      states << State.create!(name: 'Minas Gerais', uf: 'MG')
       supplier.states = states
 
-      category_second = Category.create!(name: 'Eletroeletrônicos')
-      supplier_second = Supplier.create!(name: 'GRUPO PDL - POSITIVO', category:)
+      supplier_second = Supplier.create!(name: 'GRUPO PDL - POSITIVO')
+      supplier_second.categories << Category.create!(name: 'Eletroeletrônicos')
       states_second = []
       states_second << State.create!(name: 'AC')
       states_second << State.create!(name: 'AM')
@@ -24,7 +25,7 @@ describe 'Suppliers API' do
       json_response = JSON.parse(response.body)
       expect(json_response.first['id']).to eq supplier.id
       expect(json_response.first['name']).to eq supplier.name
-      expect(json_response.first['category']).to eq category.as_json(except: %i[created_at updated_at])
+      expect(json_response.first['categories'].first).to eq category.as_json(except: %i[created_at updated_at])
       expect(json_response.first['states']).to eq states.as_json(except: %i[created_at updated_at])
       expect(json_response.first.keys).not_to include 'created_at'
       expect(json_response.first.keys).not_to include 'updated_at'
@@ -57,8 +58,9 @@ describe 'Suppliers API' do
 
   context 'GET /api/v1/suppliers/:id' do
     it 'success' do
+      supplier = Supplier.create!(name: 'Caloi', slug: 'caloi', cnpj: '35806380000100')
       category = Category.create!(name: 'Bicicletas')
-      supplier = Supplier.create!(name: 'Caloi', category:)
+      supplier.categories << category
       states = []
       states << State.create!(name: 'AM')
       states << State.create!(name: 'TO')
@@ -71,7 +73,7 @@ describe 'Suppliers API' do
       json_response = JSON.parse(response.body)
       expect(json_response['id']).to eq supplier.id
       expect(json_response['name']).to eq supplier.name
-      expect(json_response['category']).to eq category.as_json(except: %i[created_at updated_at])
+      expect(json_response['categories'].first).to eq category.as_json(except: %i[created_at updated_at])
       expect(json_response['states']).to eq states.as_json(except: %i[created_at updated_at])
       expect(json_response.keys).not_to include 'created_at'
       expect(json_response.keys).not_to include 'updated_at'

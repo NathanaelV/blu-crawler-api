@@ -1,12 +1,12 @@
 class Api::V1::SuppliersController < Api::V1::ApiController
   def index
     suppliers = Supplier.all
-    render status: 200, json: json_supplier(suppliers)
+    render json: json_suppliers(suppliers)
   end
 
   def show
     supplier = Supplier.find(params[:id])
-    render status: 200, json: json_supplier(supplier)
+    render json: json_supplier(supplier)
   end
 
   def search
@@ -14,16 +14,22 @@ class Api::V1::SuppliersController < Api::V1::ApiController
     
     suppliers = search_operator if params[:category_id] || params[:state_id]
 
-    render status: 200, json: json_supplier(suppliers)
+    render json: json_suppliers(suppliers)
   end
 
   private
 
+  def json_suppliers(suppliers)
+    suppliers.map do |supplier|
+      json_supplier(supplier)
+    end
+  end
+
   def json_supplier(supplier)
-    supplier.as_json(
-      except: %i[created_at updated_at category_id],
+    supplier.serializable_hash(
+      except: %i[created_at updated_at],
       include: { 
-        category: { except: %i[created_at updated_at] },
+        categories: { except: %i[created_at updated_at] },
         states: { except: %i[created_at updated_at] }
       }
     )
@@ -31,11 +37,11 @@ class Api::V1::SuppliersController < Api::V1::ApiController
 
   def search_operator
     if params[:operator]&.downcase == 'and'
-      Supplier.joins(:states).where("suppliers.category_id = ?", params[:category_id])
-              .and(Supplier.joins(:states).where("states.id = ?", params[:state_id]))
+      Supplier.joins(:categories, :states).where("categories.id = ?", params[:category_id])
+              .and(Supplier.joins(:categories, :states).where("states.id = ?", params[:state_id]))
     else
-      Supplier.joins(:states).where("suppliers.category_id = ?", params[:category_id])
-              .or(Supplier.joins(:states).where("states.id = ?", params[:state_id]))
+      Supplier.joins(:categories, :states).where("categories.id = ?", params[:category_id])
+              .or(Supplier.joins(:categories, :states).where("states.id = ?", params[:state_id]))
     end
   end
 end
