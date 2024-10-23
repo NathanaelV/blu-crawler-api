@@ -59,7 +59,7 @@ describe 'Suppliers API' do
   context 'GET /api/v1/suppliers/:id' do
     it 'success' do
       supplier = Supplier.create!(name: 'Caloi', slug: 'caloi', cnpj: '35806380000100')
-      category = Category.create!(name: 'Bicicletas')
+      category = Category.create!(name: 'Bicicletas', slug: 'bicicletas')
       supplier.categories << category
       states = []
       states << State.create!(name: 'AM')
@@ -73,6 +73,8 @@ describe 'Suppliers API' do
       json_response = JSON.parse(response.body)
       expect(json_response['id']).to eq supplier.id
       expect(json_response['name']).to eq supplier.name
+      expect(json_response['cnpj']).to eq supplier.cnpj
+      expect(json_response['slug']).to eq supplier.slug
       expect(json_response['categories'].first).to eq category.as_json(except: %i[created_at updated_at])
       expect(json_response['states']).to eq states.as_json(except: %i[created_at updated_at])
       expect(json_response.keys).not_to include 'created_at'

@@ -3,8 +3,8 @@ require 'rails_helper'
 describe 'States API' do
   context 'GET /api/v1/states' do
     it 'success' do
-      state = State.create!(name: 'BA')
-      state_second = State.create!(name: 'GO')
+      state = State.create!(uf: 'BA', name: 'Bahia', slug: 'bahia')
+      state_second = State.create!(uf: 'GO', name: 'Goiás', slug: 'goias')
 
       get '/api/v1/states'
 
@@ -13,11 +13,15 @@ describe 'States API' do
       json_response = JSON.parse(response.body)
       expect(json_response.first['id']).to eq state.id
       expect(json_response.first['name']).to eq state.name
+      expect(json_response.first['uf']).to eq state.uf
+      expect(json_response.first['slug']).to eq state.slug
       expect(json_response.first.keys).not_to include 'created_at'
       expect(json_response.first.keys).not_to include 'updated_at'
 
       expect(json_response.last['id']).to eq state_second.id
       expect(json_response.last['name']).to eq state_second.name
+      expect(json_response.last['uf']).to eq state_second.uf
+      expect(json_response.last['slug']).to eq state_second.slug
       expect(json_response.last.keys).not_to include 'created_at'
       expect(json_response.last.keys).not_to include 'updated_at'
     end
