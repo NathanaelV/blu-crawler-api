@@ -39,9 +39,11 @@ class Api::V1::SuppliersController < Api::V1::ApiController
     if params[:operator]&.downcase == 'and'
       Supplier.joins(:categories, :states).where("categories.id = ?", params[:category_id])
               .and(Supplier.joins(:categories, :states).where("states.id = ?", params[:state_id]))
+              .uniq
     else
       Supplier.joins(:categories, :states).where("categories.id = ?", params[:category_id])
               .or(Supplier.joins(:categories, :states).where("states.id = ?", params[:state_id]))
+              .uniq
     end
   end
 end

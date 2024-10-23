@@ -139,6 +139,20 @@ describe 'Suppliers API' do
       end
 
       it 'not found' do
+        category = Category.create!(name: 'Bicicletas')
+        category_second = Category.create!(name: 'Eletrônicos')
+        category.suppliers << first_sup = Supplier.create!(name: 'Caloi')
+        category_second.suppliers << second_sup = Supplier.create!(name: 'Wanke')
+        category_second.suppliers << third_sup = Supplier.create!(name: 'Braslar')
+        category.suppliers << fourth_sup = Supplier.create!(name: 'Groove')
+        
+        state = State.create!(name: 'Todo o Brasil')
+        bahia = State.create!(name: 'BA')
+        state.suppliers << first_sup
+        state.suppliers << second_sup
+        bahia.suppliers << third_sup
+        bahia.suppliers << fourth_sup
+
         get "/api/v1/suppliers/search?category_id=777&state_id=777"
 
         expect(response.status).to eq 200
@@ -174,6 +188,20 @@ describe 'Suppliers API' do
       end
 
       it 'not found' do
+        category = Category.create!(name: 'Bicicletas')
+        category_second = Category.create!(name: 'Eletrônicos')
+        category.suppliers << first_sup = Supplier.create!(name: 'Caloi')
+        category_second.suppliers << second_sup = Supplier.create!(name: 'Wanke')
+        category_second.suppliers << third_sup = Supplier.create!(name: 'Braslar')
+        category.suppliers << fourth_sup = Supplier.create!(name: 'Groove')
+        
+        state = State.create!(name: 'Todo o Brasil')
+        bahia = State.create!(name: 'BA')
+        state.suppliers << first_sup
+        state.suppliers << second_sup
+        bahia.suppliers << third_sup
+        bahia.suppliers << fourth_sup
+
         get "/api/v1/suppliers/search?category_id=777&state_id=777&operator=and"
 
         expect(response.status).to eq 200
