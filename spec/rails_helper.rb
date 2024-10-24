@@ -32,6 +32,10 @@ begin
 rescue ActiveRecord::PendingMigrationError => e
   abort e.to_s.strip
 end
+
+require 'webmock/rspec'
+WebMock.disable_net_connect!(allow_localhost: true)
+
 RSpec.configure do |config|
   config.before(type: :system) do
 		driven_by(:rack_test)

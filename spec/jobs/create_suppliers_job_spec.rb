@@ -85,5 +85,8 @@ RSpec.describe CreateSuppliersJob, type: :job do
     expect(Supplier.first.slug).to eq '1-click-interiores'
     expect(Supplier.first.categories.first.name).to eq 'Colchões'
     expect(Supplier.first.categories.last.name).to eq 'Móveis'
+    expect(Supplier.first.states.first.name).to eq 'Goiás'
+    expect(Supplier.first.states.first.uf).to eq 'GO'
+    expect(Supplier.first.states.first.slug).to eq 'goias'
   end
 end
