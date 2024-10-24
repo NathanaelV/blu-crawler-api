@@ -3,60 +3,64 @@ RSpec.describe CreateSuppliersJob, type: :job do
   it 'Active Jobs' do
     first_data = {
       suppliers: [
-        id: 2,
-        cpf_cnpj: '35806380000130',
-        name: '1 Click Interiores',
-        slug: '1-click-interiores',
-        departments: [
-          {
-            id: 9,
-            name: 'Colchões',
-            slug: 'colchoes'
-          },
-          {
-            id: 45,
-            name: 'Móveis',
-            slug: 'moveis'
-          }
-        ],
-        positions: [
-          {
-            id: 9,
-            uf: 'GO',
-            name: 'Goiás',
-            slug: 'goias'
-          },
-          {
-            id: 13,
-            uf: 'MG',
-            name: 'Minas Gerais',
-            slug: 'minas-gerais'
-          }
-        ]
+        {
+          id: 2,
+          cpf_cnpj: '35806380000130',
+          name: '1 Click Interiores',
+          slug: '1-click-interiores',
+          departments: [
+            {
+              id: 9,
+              name: 'Colchões',
+              slug: 'colchoes'
+            },
+            {
+              id: 45,
+              name: 'Móveis',
+              slug: 'moveis'
+            }
+          ],
+          positions: [
+            {
+              id: 9,
+              uf: 'GO',
+              name: 'Goiás',
+              slug: 'goias'
+            },
+            {
+              id: 13,
+              uf: 'MG',
+              name: 'Minas Gerais',
+              slug: 'minas-gerais'
+            }
+          ]
+        }
       ],
       total_pages: 2
     }
     second_data = {
       suppliers: [
-        id: 4543,
-        cpf_cnpj: '38496592000157',
-        name: '20 20 Laboratório Óptico',
-        slug: 'oculos-so-conserto-ltda',
-        departments: [
-          {
-            id: 36,
-            name: 'Ótica',
-            slug: 'otica'
-          }
-        ],
-        positions: [
-          {
-            id: 13,
-            uf: 'MG',
-            name: 'Minas Gerais',
-            slug: 'minas-gerais'
-          }
-        ]
+        {
+          id: 4543,
+          cpf_cnpj: '38496592000157',
+          name: '20 20 Laboratório Óptico',
+          slug: 'oculos-so-conserto-ltda',
+          departments: [
+            {
+              id: 36,
+              name: 'Ótica',
+              slug: 'otica'
+            }
+          ],
+          positions: [
+            {
+              id: 13,
+              uf: 'MG',
+              name: 'Minas Gerais',
+              slug: 'minas-gerais'
+            }
+          ]
+        }
       ],
       total_pages: 2
     }
