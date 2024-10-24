@@ -3,10 +3,10 @@
 Essa aplicação tem o objetivo de coletar todos os fornecedores do site https://fornecedores.blu.com.br/ e disponibilizá-los via API.
 
 ## Pré-requisitos
-Para executar esse projeto local, será necessário instalar o [Docker](https://docs.docker.com/engine/install/).<br>
+Para executar esse projeto local, será necessário instalar o [Docker](https://docs.docker.com/engine/install/) e o Docker compose.<br>
     *A versão utilizada nesse projeto foi a **27.3.1**.*
 
-## Execução do projeto
+## Clone do projeto
 
 Clone o projeto para sua máquina
 
@@ -20,28 +20,20 @@ Acesse o diretório da aplicação
 cd blu-crawler-api
 ```
 
-Com o Docker já instalado, execute o seguinte comando parar construir a imagem
+## Configurações iniciais
+Com o Docker compose já instalado, execute o seguinte comando parar construir a imagem
 
 ```bash
-docker build -t blu-crawler:v1 .
+docker compose build
 ```
 
-Abra a aplicação no terminal Bash
+Execute as configurações iniciais
 
 ```bash
-docker run -it --rm -v $(pwd):/blu-crawler blu-crawler:v1 /bin/bash
+docker compose run --rm web-api bin/setup
 ```
 
-Caso execute corretamente, verá algo parecido com **`root@81c6a9a5c623:/blu-crawler#`** no seu terminal.<br>
-Execute a migration com o seguinte comando:
-
-```bash
-rails db:migrate
-```
-
-Após executar o comando acima, pode sair do terminal do Docker com **Ctrl + D**. 
-
-Já no seu terminal local, execute o seguinte comando parar construir a imagem e executar a aplicação.
+Após finalizar as configurações, execute o seguinte comando para executar a aplicação.
 
 ```bash
 docker compose up

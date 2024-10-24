@@ -25,4 +25,3 @@ COPY Gemfile Gemfile.lock ./
 RUN bundle install
 
 COPY . .
-RUN bin/setup
