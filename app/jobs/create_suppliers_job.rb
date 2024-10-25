@@ -34,8 +34,7 @@ class CreateSuppliersJob < ApplicationJob
       end
 
       supplier[:positions].each do |position|
-        state = State.create_with(name: position[:name], uf: position[:uf])
-                     .find_or_create_by(slug: position[:slug])
+        state = State.find_by(slug: position[:slug])
         local_supplier.states << state
       end
     end

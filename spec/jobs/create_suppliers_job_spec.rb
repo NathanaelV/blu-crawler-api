@@ -1,6 +1,9 @@
 require 'rails_helper'
 RSpec.describe CreateSuppliersJob, type: :job do
   it 'Active Jobs' do
+    State.create!(uf: 'GO', name: 'Goiás', slug: 'goias')
+    State.create!(uf: 'MG', name: 'Minas Gerais', slug: 'minas-gerais')
+    
     first_data = {
       suppliers: [
         {
