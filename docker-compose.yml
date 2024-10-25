@@ -9,3 +9,22 @@ services:
       - 3000:3000
     volumes:
       - .:/blu-crawler
+    depends_on:
+      - redis
+    environment:
+      REDIS_URL: redis://redis:6379/0
+
+  redis:
+    image: redis:alpine
+    ports:
+      - 6379:6379
+
+  sidekiq:
+    build: .
+    command: bundle exec sidekiq
+    volumes:
+      - .:/blu-crawler
+    depends_on:
+      - redis
+    environment:
+      REDIS_URL: redis://redis:6379/0
